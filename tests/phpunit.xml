@@ -9,11 +9,6 @@
             colors="true">
     <testsuites>
         <testsuite name="Lunr Testsuite">
-            <filter>
-                <whitelist>
-                    <directory suffix=".php">system</directory>
-                </whitelist>
-            </filter>
         </testsuite>
     </testsuites>
     <logging>
