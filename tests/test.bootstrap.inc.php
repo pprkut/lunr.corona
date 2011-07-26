@@ -4,6 +4,7 @@ $base = dirname(__FILE__) . "/..";
 
 set_include_path(
     $base . "/system:" .
+    $base . "/tests:" .
     get_include_path()
 );
 
