@@ -12,6 +12,11 @@
             <file>tests/system/libraries/core/class.view.test.php</file>
         </testsuite>
     </testsuites>
+    <filter>
+        <blacklist>
+            <directory>../tests/</directory>
+        </blacklist>
+    </filter>
     <logging>
         <log    type="coverage-html"
                 target="../build/coverage"
