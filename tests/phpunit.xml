@@ -13,6 +13,7 @@
             <file>tests/system/libraries/core/class.request.store.test.php</file>
             <file>tests/system/libraries/core/class.request.get.test.php</file>
             <file>tests/system/libraries/core/class.response.test.php</file>
+            <file>tests/system/libraries/core/class.controller.test.php</file>
             <file>tests/system/libraries/core/class.view.test.php</file>
         </testsuite>
     </testsuites>
