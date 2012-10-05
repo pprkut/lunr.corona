@@ -15,7 +15,9 @@
             <file>tests/system/libraries/core/class.request.get.test.php</file>
             <file>tests/system/libraries/core/class.response.test.php</file>
             <file>tests/system/libraries/core/class.controller.test.php</file>
-            <file>tests/system/libraries/core/class.view.test.php</file>
+            <file>tests/system/libraries/core/class.view.l10n.test.php</file>
+            <file>tests/system/libraries/core/class.view.nol10n.test.php</file>
+            <file>tests/system/libraries/core/class.view.helpers.test.php</file>
         </testsuite>
     </testsuites>
     <filter>
