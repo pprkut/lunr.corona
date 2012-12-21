@@ -13,9 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core;
 
-use Lunr\Libraries\Database\DBMan;
+use Lunr\Database\DBMan;
 
 /**
  * Base Model class

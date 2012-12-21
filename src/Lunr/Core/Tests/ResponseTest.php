@@ -13,8 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core\Tests;
 
+use Lunr\Core\Response;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -25,7 +26,7 @@ use ReflectionClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Libraries\Core\Response
+ * @covers     Lunr\Core\Response
  */
 class ResponseTest extends PHPUnit_Framework_TestCase
 {
@@ -48,7 +49,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->response            = new Response();
-        $this->response_reflection = new ReflectionClass('Lunr\Libraries\Core\Response');
+        $this->response_reflection = new ReflectionClass('Lunr\Core\Response');
     }
 
     /**
@@ -111,7 +112,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      * Test adding response data.
      *
      * @depends testDataEmptyByDefault
-     * @covers  Lunr\Libraries\Core\Response::add_response_data
+     * @covers  Lunr\Core\Response::add_response_data
      */
     public function testAddResponseData()
     {
@@ -130,7 +131,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      * Test getting existing response data.
      *
      * @depends testAddResponseData
-     * @covers  Lunr\Libraries\Core\Response::get_response_data
+     * @covers  Lunr\Core\Response::get_response_data
      */
     public function testGetResponseDataWithExistingKey()
     {
@@ -142,7 +143,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Test getting non-existing response data.
      *
-     * @covers  Lunr\Libraries\Core\Response::get_response_data
+     * @covers  Lunr\Core\Response::get_response_data
      */
     public function testGetResponseDataWithNonExistingKey()
     {
@@ -152,7 +153,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Test setting an error message.
      *
-     * @covers Lunr\Libraries\Core\Response::__set
+     * @covers Lunr\Core\Response::__set
      */
     public function testSetErrorMessage()
     {
@@ -167,7 +168,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Test setting an error information.
      *
-     * @covers Lunr\Libraries\Core\Response::__set
+     * @covers Lunr\Core\Response::__set
      */
     public function testSetErrorInformation()
     {
@@ -182,7 +183,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Test setting a valid return code.
      *
-     * @covers Lunr\Libraries\Core\Response::__set
+     * @covers Lunr\Core\Response::__set
      */
     public function testSetValidReturnCode()
     {
@@ -200,7 +201,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      * @param mixed $code Invalid return code value.
      *
      * @dataProvider invalidReturnCodeProvider
-     * @covers       Lunr\Libraries\Core\Response::__set
+     * @covers       Lunr\Core\Response::__set
      */
     public function testSetInvalidReturnCode($code)
     {
@@ -215,7 +216,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Test that setting data directly does not work.
      *
-     * @covers Lunr\Libraries\Core\Response::__set
+     * @covers Lunr\Core\Response::__set
      */
     public function testSetDataDirectlyDoesNotWork()
     {
@@ -240,7 +241,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      * @depends      testErrorMessageEmptyByDefault
      * @depends      testReturnCodeIsZeroByDefault
      * @dataProvider validResponseAttributesProvider
-     * @covers       Lunr\Libraries\Core\Response::__get
+     * @covers       Lunr\Core\Response::__get
      */
     public function testGettingExistingAttributes($attr, $value)
     {
@@ -250,7 +251,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     /**
      * Test that getting data does not work.
      *
-     * @covers Lunr\Libraries\Core\Response::__get
+     * @covers Lunr\Core\Response::__get
      */
     public function testGettingDataDoesNotWork()
     {

@@ -13,7 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core\Tests;
+
+use Lunr\Core\View;
 
 /**
  * This class tests the helper methods of the view class.
@@ -22,7 +24,7 @@ namespace Lunr\Libraries\Core;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Libraries\Core\View
+ * @covers     Lunr\Core\View
  */
 class ViewHelpersTest extends ViewTest
 {
@@ -43,7 +45,7 @@ class ViewHelpersTest extends ViewTest
      * @param String $result  expected combined result
      *
      * @dataProvider baseUrlProvider
-     * @covers       Lunr\Libraries\Core\View::base_url
+     * @covers       Lunr\Core\View::base_url
      */
     public function testBaseUrl($baseurl, $path, $result)
     {
@@ -66,7 +68,7 @@ class ViewHelpersTest extends ViewTest
      * @param String $result  expected combined result
      *
      * @dataProvider staticsProvider
-     * @covers       Lunr\Libraries\Core\View::statics
+     * @covers       Lunr\Core\View::statics
      */
     public function testStatics($base, $statics, $path, $result)
     {
@@ -92,7 +94,7 @@ class ViewHelpersTest extends ViewTest
      * @param String $result           expected combined result
      *
      * @dataProvider cssAlternateProvider
-     * @covers       Lunr\Libraries\Core\View::css_alternate
+     * @covers       Lunr\Core\View::css_alternate
      */
     public function testCssAlternate($basename, $alternation_hint, $suffix, $result)
     {

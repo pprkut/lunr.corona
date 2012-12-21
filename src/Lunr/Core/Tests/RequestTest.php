@@ -14,8 +14,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core\Tests;
 
+use Lunr\Core\Request;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -28,7 +29,7 @@ use ReflectionClass;
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers     Lunr\Libraries\Core\Request
+ * @covers     Lunr\Core\Request
  */
 abstract class RequestTest extends PHPUnit_Framework_TestCase
 {
@@ -69,7 +70,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
             runkit_function_redefine('gethostname', '', self::GET_HOSTNAME);
         }
 
-        $configuration = $this->getMock('Lunr\Libraries\Core\Configuration');
+        $configuration = $this->getMock('Lunr\Core\Configuration');
 
         $map = array(
             array('default_webpath', '/path'),
@@ -87,7 +88,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
 
         $this->configuration = $configuration;
 
-        $this->reflection_request = new ReflectionClass('Lunr\Libraries\Core\Request');
+        $this->reflection_request = new ReflectionClass('Lunr\Core\Request');
     }
 
     /**

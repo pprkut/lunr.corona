@@ -14,9 +14,10 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core\Tests;
 
-use \ReflectionClass;
+use Lunr\Core\Request;
+use ReflectionClass;
 
 /**
  * Tests for storing superglobal values.
@@ -26,7 +27,7 @@ use \ReflectionClass;
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers     Lunr\Libraries\Core\Request
+ * @covers     Lunr\Core\Request
  */
 class RequestStoreTest extends RequestTest
 {
@@ -44,9 +45,9 @@ class RequestStoreTest extends RequestTest
      *
      * @param mixed $cookie Invalid $_COOKIE values
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testCookieEmpty
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testCookieEmpty
      * @dataProvider invalidSuperglobalValueProvider
-     * @covers       Lunr\Libraries\Core\Request::store_cookie
+     * @covers       Lunr\Core\Request::store_cookie
      */
     public function testStoreInvalidCookieValuesLeavesLocalCookieEmpty($cookie)
     {
@@ -71,9 +72,9 @@ class RequestStoreTest extends RequestTest
     *
     * @param mixed $cookie Invalid $_COOKIE values
     *
-    * @depends      Lunr\Libraries\Core\RequestBaseTest::testCookieEmpty
+    * @depends      Lunr\Core\Tests\RequestBaseTest::testCookieEmpty
     * @dataProvider invalidSuperglobalValueProvider
-    * @covers       Lunr\Libraries\Core\Request::store_cookie
+    * @covers       Lunr\Core\Request::store_cookie
     */
     public function testStoreInvalidCookieValuesResetsSuperglobalCookie($cookie)
     {
@@ -90,8 +91,8 @@ class RequestStoreTest extends RequestTest
     /**
      * Test storing valid $_COOKIE values.
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testCookieEmpty
-     * @covers       Lunr\Libraries\Core\Request::store_cookie
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testCookieEmpty
+     * @covers       Lunr\Core\Request::store_cookie
      */
     public function testStoreValidCookieValues()
     {
@@ -113,8 +114,8 @@ class RequestStoreTest extends RequestTest
     /**
      * Test that $_COOKIE is empty after storing.
      *
-     * @depends Lunr\Libraries\Core\RequestBaseTest::testCookieEmpty
-     * @covers  Lunr\Libraries\Core\Request::store_cookie
+     * @depends Lunr\Core\Tests\RequestBaseTest::testCookieEmpty
+     * @covers  Lunr\Core\Request::store_cookie
      */
     public function testSuperglobalCookieEmptyAfterStore()
     {
@@ -137,9 +138,9 @@ class RequestStoreTest extends RequestTest
      *
      * @param mixed $post Invalid $_POST values
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testPostEmpty
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testPostEmpty
      * @dataProvider invalidSuperglobalValueProvider
-     * @covers       Lunr\Libraries\Core\Request::store_post
+     * @covers       Lunr\Core\Request::store_post
      */
     public function testStoreInvalidPostValuesLeavesLocalPostEmpty($post)
     {
@@ -164,9 +165,9 @@ class RequestStoreTest extends RequestTest
     *
     * @param mixed $post Invalid $_POST values
     *
-    * @depends      Lunr\Libraries\Core\RequestBaseTest::testPostEmpty
+    * @depends      Lunr\Core\Tests\RequestBaseTest::testPostEmpty
     * @dataProvider invalidSuperglobalValueProvider
-    * @covers       Lunr\Libraries\Core\Request::store_post
+    * @covers       Lunr\Core\Request::store_post
     */
     public function testStoreInvalidPostValuesResetsSuperglobalPost($post)
     {
@@ -183,8 +184,8 @@ class RequestStoreTest extends RequestTest
     /**
      * Test storing valid $_POST values.
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testPostEmpty
-     * @covers       Lunr\Libraries\Core\Request::store_post
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testPostEmpty
+     * @covers       Lunr\Core\Request::store_post
      */
     public function testStoreValidPostValues()
     {
@@ -206,8 +207,8 @@ class RequestStoreTest extends RequestTest
     /**
      * Test that $_POST is empty after storing.
      *
-     * @depends Lunr\Libraries\Core\RequestBaseTest::testPostEmpty
-     * @covers  Lunr\Libraries\Core\Request::store_post
+     * @depends Lunr\Core\Tests\RequestBaseTest::testPostEmpty
+     * @covers  Lunr\Core\Request::store_post
      */
     public function testSuperglobalPostEmptyAfterStore()
     {
@@ -229,7 +230,7 @@ class RequestStoreTest extends RequestTest
      * Test that the base_path is constructed and stored correctly.
      *
      * @runInSeparateProcess
-     * @covers Lunr\Libraries\Core\Request::store_url
+     * @covers Lunr\Core\Request::store_url
      */
     public function testStoreBasePath()
     {
@@ -254,7 +255,7 @@ class RequestStoreTest extends RequestTest
      * Test that the domain is stored correctly.
      *
      * @runInSeparateProcess
-     * @covers Lunr\Libraries\Core\Request::store_url
+     * @covers Lunr\Core\Request::store_url
      */
     public function testStoreDomain()
     {
@@ -279,7 +280,7 @@ class RequestStoreTest extends RequestTest
      * Test that the port is stored correctly.
      *
      * @runInSeparateProcess
-     * @covers Lunr\Libraries\Core\Request::store_url
+     * @covers Lunr\Core\Request::store_url
      */
     public function testStorePort()
     {
@@ -304,7 +305,7 @@ class RequestStoreTest extends RequestTest
      * Test that the protocol is constructed and stored correctly.
      *
      * @runInSeparateProcess
-     * @covers Lunr\Libraries\Core\Request::store_url
+     * @covers Lunr\Core\Request::store_url
      */
     public function testStorePortIfHttpsUnset()
     {
@@ -335,7 +336,7 @@ class RequestStoreTest extends RequestTest
      * @runInSeparateProcess
      *
      * @dataProvider httpsServerSuperglobalValueProvider
-     * @covers Lunr\Libraries\Core\Request::store_url
+     * @covers Lunr\Core\Request::store_url
      */
     public function testStorePortIfHttpsIsset($value, $protocol)
     {
@@ -367,7 +368,7 @@ class RequestStoreTest extends RequestTest
      * @runInSeparateProcess
      *
      * @dataProvider baseurlProvider
-     * @covers Lunr\Libraries\Core\Request::store_url
+     * @covers Lunr\Core\Request::store_url
      */
     public function testStoreBaseUrl($https, $port, $value)
     {
@@ -398,9 +399,9 @@ class RequestStoreTest extends RequestTest
      *
      * @param mixed $get Invalid $_GET values
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testGetEmpty
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
      * @dataProvider invalidSuperglobalValueProvider
-     * @covers       Lunr\Libraries\Core\Request::store_get
+     * @covers       Lunr\Core\Request::store_get
      */
     public function testStoreInvalidGetValuesLeavesGetPropertyEmpty($get)
     {
@@ -425,9 +426,9 @@ class RequestStoreTest extends RequestTest
     *
     * @param mixed $get Invalid $_GET values
     *
-    * @depends      Lunr\Libraries\Core\RequestBaseTest::testGetEmpty
+    * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
     * @dataProvider invalidSuperglobalValueProvider
-    * @covers       Lunr\Libraries\Core\Request::store_get
+    * @covers       Lunr\Core\Request::store_get
     */
     public function testStoreInvalidGetValuesResetsSuperglobalGet($get)
     {
@@ -450,9 +451,9 @@ class RequestStoreTest extends RequestTest
     *
     * @param mixed $get Invalid $_GET values
     *
-    * @depends      Lunr\Libraries\Core\RequestBaseTest::testGetEmpty
+    * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
     * @dataProvider invalidSuperglobalValueProvider
-    * @covers       Lunr\Libraries\Core\Request::store_get
+    * @covers       Lunr\Core\Request::store_get
     */
     public function testStoreInvalidGetValuesGetsDefaultControllerAndMethodWithEmptyParams($get)
     {
@@ -476,8 +477,8 @@ class RequestStoreTest extends RequestTest
     /**
      * Test storing valid $_GET values.
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testGetEmpty
-     * @covers       Lunr\Libraries\Core\Request::store_get
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
+     * @covers       Lunr\Core\Request::store_get
      */
     public function testStoreValidGetValues()
     {
@@ -499,8 +500,8 @@ class RequestStoreTest extends RequestTest
     /**
      * Test storing special $_GET values.
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testGetEmpty
-     * @covers       Lunr\Libraries\Core\Request::store_get
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
+     * @covers       Lunr\Core\Request::store_get
      */
     public function testStoreSpecialGetValues()
     {
@@ -529,8 +530,8 @@ class RequestStoreTest extends RequestTest
     /**
      * Test storing special $_GET values, if they are not present.
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testGetEmpty
-     * @covers       Lunr\Libraries\Core\Request::store_get
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
+     * @covers       Lunr\Core\Request::store_get
      */
     public function testStoreSpecialGetValuesIfNotSet()
     {
@@ -557,8 +558,8 @@ class RequestStoreTest extends RequestTest
     /**
      * Test that $_GET is empty after storing.
      *
-     * @depends Lunr\Libraries\Core\RequestBaseTest::testGetEmpty
-     * @covers  Lunr\Libraries\Core\Request::store_get
+     * @depends Lunr\Core\Tests\RequestBaseTest::testGetEmpty
+     * @covers  Lunr\Core\Request::store_get
      */
     public function testSuperglobalGetEmptyAfterStore()
     {

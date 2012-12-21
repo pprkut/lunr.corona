@@ -13,9 +13,10 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core\Tests;
 
-use \ReflectionClass;
+use Lunr\Core\Request;
+use ReflectionClass;
 
 /**
  * Basic tests for the case of empty superglobals.
@@ -24,7 +25,7 @@ use \ReflectionClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Libraries\Core\Request
+ * @covers     Lunr\Core\Request
  */
 class RequestBaseTest extends RequestTest
 {
@@ -110,7 +111,7 @@ class RequestBaseTest extends RequestTest
      * Test setting json enums.
      *
      * @depends testJsonEnumsEmpty
-     * @covers  Lunr\Libraries\Core\Request::set_json_enums
+     * @covers  Lunr\Core\Request::set_json_enums
      */
     public function testSetJsonEnums()
     {
@@ -129,7 +130,7 @@ class RequestBaseTest extends RequestTest
      *
      * @depends      testGetEmpty
      * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Libraries\Core\Request::get_get_data
+     * @covers       Lunr\Core\Request::get_get_data
      */
     public function testGetGetDataWhenGetEmpty($key)
     {
@@ -143,7 +144,7 @@ class RequestBaseTest extends RequestTest
      *
      * @depends      testPostEmpty
      * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Libraries\Core\Request::get_post_data
+     * @covers       Lunr\Core\Request::get_post_data
      */
     public function testGetPostDataWhenPostEmpty($key)
     {
@@ -157,7 +158,7 @@ class RequestBaseTest extends RequestTest
      *
      * @depends      testCookieEmpty
      * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Libraries\Core\Request::get_cookie_data
+     * @covers       Lunr\Core\Request::get_cookie_data
      */
     public function testGetCookieDataWhenCookieEmpty($key)
     {
@@ -172,7 +173,7 @@ class RequestBaseTest extends RequestTest
      *
      * @depends      testRequestDefaultValues
      * @dataProvider requestValueProvider
-     * @covers       Lunr\Libraries\Core\Request::__get
+     * @covers       Lunr\Core\Request::__get
      */
     public function testMagicGetMethodWhenGetEmpty($key, $value)
     {
@@ -185,7 +186,7 @@ class RequestBaseTest extends RequestTest
      * @param String $key key for __get()
      *
      * @dataProvider unhandledMagicGetKeysProvider
-     * @covers       Lunr\Libraries\Core\Request::__get
+     * @covers       Lunr\Core\Request::__get
      */
     public function testMagicGetIsNullForUnhandledKeys($key)
     {

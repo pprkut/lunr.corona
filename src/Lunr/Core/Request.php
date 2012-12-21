@@ -14,7 +14,7 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core;
 
 /**
  * Request abstraction class.

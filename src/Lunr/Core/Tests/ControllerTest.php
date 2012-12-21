@@ -13,8 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core\Tests;
 
+use Lunr\Libraries\Controller;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -25,7 +26,7 @@ use ReflectionClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Libraries\Core\Controller
+ * @covers     Lunr\Core\Controller
  */
 class ControllerTest extends PHPUnit_Framework_TestCase
 {
@@ -53,13 +54,13 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->response = $this->getMock('Lunr\Libraries\Core\Response');
+        $this->response = $this->getMock('Lunr\Core\Response');
 
-        $this->controller = $this->getMockBuilder('Lunr\Libraries\Core\Controller')
+        $this->controller = $this->getMockBuilder('Lunr\Core\Controller')
                                  ->setConstructorArgs(array(&$this->response))
                                  ->getMockForAbstractClass();
 
-        $this->controller_reflection = new ReflectionClass('Lunr\Libraries\Core\Controller');
+        $this->controller_reflection = new ReflectionClass('Lunr\Core\Controller');
     }
 
     /**
@@ -102,7 +103,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      * Test calling unimplemented methods without error enums set.
      *
      * @depends testErrorEmptyByDefault
-     * @covers  Lunr\Libraries\Core\Controller::__call
+     * @covers  Lunr\Core\Controller::__call
      */
     public function testNonImplementedCallWithoutEnumsSet()
     {
@@ -116,7 +117,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     /**
      * Test setting error enums.
      *
-     * @covers Lunr\Libraries\Core\Controller::set_error_enums
+     * @covers Lunr\Core\Controller::set_error_enums
      */
     public function testSetErrorEnums()
     {
@@ -137,7 +138,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      * Test calling unimplemented methods with error enums set.
      *
      * @depends testSetErrorEnums
-     * @covers  Lunr\Libraries\Core\Controller::__call
+     * @covers  Lunr\Core\Controller::__call
      */
     public function testNonImplementedCallWithEnumsSet()
     {

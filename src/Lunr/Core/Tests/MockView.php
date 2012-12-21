@@ -14,9 +14,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Mocks\Libraries\Core;
+namespace Lunr\Core\Tests;
 
-use Lunr\Libraries\Core\View;
+use Lunr\Core\View;
 
 /**
  * View Mock class

@@ -14,9 +14,10 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core\Tests;
 
-use \ReflectionClass;
+use Lunr\Core\Request;
+use ReflectionClass;
 
 /**
  * Tests for getting stored superglobal values.
@@ -26,7 +27,7 @@ use \ReflectionClass;
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers     Lunr\Libraries\Core\Request
+ * @covers     Lunr\Core\Request
  */
 class RequestGetTest extends RequestTest
 {
@@ -47,14 +48,14 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreBasePath
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreDomain
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStorePort
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStorePortIfHttpsIsset
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreBaseUrl
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreSpecialGetValues
+     * @depends      Lunr\Core\Tests\RequestStoreTest::testStoreBasePath
+     * @depends      Lunr\Core\Tests\RequestStoreTest::testStoreDomain
+     * @depends      Lunr\Core\Tests\RequestStoreTest::testStorePort
+     * @depends      Lunr\Core\Tests\RequestStoreTest::testStorePortIfHttpsIsset
+     * @depends      Lunr\Core\Tests\RequestStoreTest::testStoreBaseUrl
+     * @depends      Lunr\Core\Tests\RequestStoreTest::testStoreSpecialGetValues
      * @dataProvider properRequestValueProvider
-     * @covers       Lunr\Libraries\Core\Request::__get
+     * @covers       Lunr\Core\Request::__get
      */
     public function testMagicGetMethod($key, $value)
     {
@@ -81,9 +82,9 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreValidGetValues
+     * @depends      Lunr\Core\Tests\RequestStoreTest::testStoreValidGetValues
      * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Libraries\Core\Request::get_get_data
+     * @covers       Lunr\Core\Request::get_get_data
      */
     public function testGetGetData($value, $key)
     {
@@ -98,9 +99,9 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreValidPostValues
+     * @depends      Lunr\Core\Tests\RequestStoreTest::testStoreValidPostValues
      * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Libraries\Core\Request::get_post_data
+     * @covers       Lunr\Core\Request::get_post_data
      */
     public function testGetPostData($value, $key)
     {
@@ -115,9 +116,9 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreValidCookieValues
+     * @depends      Lunr\Core\Tests\RequestStoreTest::testStoreValidCookieValues
      * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Libraries\Core\Request::get_cookie_data
+     * @covers       Lunr\Core\Request::get_cookie_data
      */
     public function testGetCookieData($value, $key)
     {
@@ -131,10 +132,10 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testSetJsonEnums
      * @depends      testGetPostData
      * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Libraries\Core\Request::get_json_from_post
+     * @covers       Lunr\Core\Request::get_json_from_post
      */
     public function testGetValidJsonFromPost($index)
     {
@@ -148,10 +149,10 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testSetJsonEnums
      * @depends      testGetPostData
      * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Libraries\Core\Request::get_json_from_post
+     * @covers       Lunr\Core\Request::get_json_from_post
      */
     public function testGetNonExistingJsonFromPostIsNull($index)
     {
@@ -165,10 +166,10 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testSetJsonEnums
      * @depends      testGetGetData
      * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Libraries\Core\Request::get_json_from_get
+     * @covers       Lunr\Core\Request::get_json_from_get
      */
     public function testGetValidJsonFromGet($index)
     {
@@ -182,10 +183,10 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testSetJsonEnums
      * @depends      testGetGetData
      * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Libraries\Core\Request::get_json_from_get
+     * @covers       Lunr\Core\Request::get_json_from_get
      */
     public function testGetNonExistingJsonFromGetIsNull($index)
     {

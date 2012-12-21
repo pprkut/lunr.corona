@@ -13,7 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Core\Tests;
+
+use Lunr\Core\View;
 
 /**
  * Base tests for the view class when there is no L10nProvider.
@@ -22,7 +24,7 @@ namespace Lunr\Libraries\Core;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Libraries\Core\View
+ * @covers     Lunr\Core\View
  */
 class ViewNoL10nTest extends ViewTest
 {
