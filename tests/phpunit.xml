@@ -16,6 +16,9 @@
             <file>src/Lunr/Core/Tests/ResponseTest.php</file>
             <file>src/Lunr/Core/Tests/ErrorEnumTraitTest.php</file>
             <file>src/Lunr/Core/Tests/ControllerTest.php</file>
+            <file>src/Lunr/Core/Tests/FrontControllerBaseTest.php</file>
+            <file>src/Lunr/Core/Tests/FrontControllerGetTest.php</file>
+            <file>src/Lunr/Core/Tests/FrontControllerDispatchTest.php</file>
             <file>src/Lunr/Core/Tests/ViewBaseTest.php</file>
             <file>src/Lunr/Core/Tests/ViewHelpersTest.php</file>
         </testsuite>
