@@ -21,6 +21,8 @@
             <file>src/Lunr/Core/Tests/FrontControllerDispatchTest.php</file>
             <file>src/Lunr/Core/Tests/ViewBaseTest.php</file>
             <file>src/Lunr/Core/Tests/ViewHelpersTest.php</file>
+            <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
+            <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
