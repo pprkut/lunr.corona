@@ -22,6 +22,7 @@ set_include_path(
     $base . '/system:' .
     $base . '/tests:' .
     $base . '/tests/mocks:' .
+    $base . '/tests/statics:' .
     $base . '/tests/system:' .
     get_include_path()
 );
