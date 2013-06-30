@@ -6,9 +6,16 @@
             syntaxCheck="false"
             forceCoversAnnotation="true"
             mapTestClassNameToCoveredClassName="true"
-            colors="true">
+            colors="true"
+            verbose="true">
+    <php>
+        <ini name="zend.enable_gc" value="0" />
+    </php>
     <testsuites>
-        <testsuite name="Lunr Testsuite">
+        <testsuite name="Environment Tests">
+            <file>tests/system/EnvironmentTest.php</file>
+        </testsuite>
+        <testsuite name="Core">
             <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Core/Tests/RequestBaseTest.php</file>
             <file>src/Lunr/Core/Tests/RequestStoreTest.php</file>
@@ -24,9 +31,12 @@
             <file>src/Lunr/Core/Tests/FrontControllerDispatchTest.php</file>
             <file>src/Lunr/Core/Tests/ViewBaseTest.php</file>
             <file>src/Lunr/Core/Tests/ViewHelpersTest.php</file>
+            <file>src/Lunr/Core/Tests/InterRequestTest.php</file>
+        </testsuite>
+        <testsuite name="Shadow">
+            <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
-            <file>src/Lunr/Core/Tests/InterRequestTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
