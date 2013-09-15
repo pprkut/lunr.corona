@@ -38,6 +38,8 @@
             <file>src/Lunr/Corona/Tests/ResponseSetTest.php</file>
             <file>src/Lunr/Corona/Tests/ViewBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/ViewHelpersTest.php</file>
+            <file>src/Lunr/Corona/Tests/HTMLViewBaseTest.php</file>
+            <file>src/Lunr/Corona/Tests/HTMLViewHelpersTest.php</file>
         </testsuite>
         <testsuite name="Shadow">
             <file>tests/system/EnvironmentTest.php</file>
