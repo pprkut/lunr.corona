@@ -5,7 +5,7 @@
  *
  * Set include path and initialize autoloader.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Loaders
  * @package    Tests
@@ -15,15 +15,13 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-$base = dirname(__FILE__) . '/..';
+$base = __DIR__ . '/..';
 
 set_include_path(
     $base . '/src:' .
     $base . '/system:' .
     $base . '/tests:' .
-    $base . '/tests/mocks:' .
     $base . '/tests/statics:' .
-    $base . '/tests/system:' .
     get_include_path()
 );
 
@@ -32,5 +30,10 @@ require_once 'Lunr/Core/Autoloader.php';
 
 $autoloader = new Lunr\Core\Autoloader();
 $autoloader->register();
+
+if (defined('TEST_STATICS') === FALSE)
+{
+    define('TEST_STATICS', __DIR__ . '/statics');
+}
 
 ?>
