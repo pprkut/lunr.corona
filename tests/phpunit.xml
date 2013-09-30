@@ -12,11 +12,7 @@
         <ini name="zend.enable_gc" value="0" />
     </php>
     <testsuites>
-        <testsuite name="Environment Tests">
-            <file>tests/system/EnvironmentTest.php</file>
-        </testsuite>
         <testsuite name="Corona">
-            <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Corona/Tests/ControllerBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/ControllerResultTest.php</file>
             <file>src/Lunr/Corona/Tests/ErrorEnumTraitTest.php</file>
@@ -42,7 +38,6 @@
             <file>src/Lunr/Corona/Tests/HTMLViewHelpersTest.php</file>
         </testsuite>
         <testsuite name="Shadow">
-            <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
         </testsuite>
