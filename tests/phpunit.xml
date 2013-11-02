@@ -38,6 +38,7 @@
         <testsuite name="Shadow">
             <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
+            <file>src/Lunr/Shadow/Tests/CliRequestStoreRequestTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
