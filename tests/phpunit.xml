@@ -34,6 +34,8 @@
             <file>src/Lunr/Corona/Tests/ViewHelpersTest.php</file>
             <file>src/Lunr/Corona/Tests/HTMLViewBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/HTMLViewHelpersTest.php</file>
+            <file>src/Lunr/Corona/Tests/JsonViewBaseTest.php</file>
+            <file>src/Lunr/Corona/Tests/JsonViewPrintTest.php</file>
         </testsuite>
         <testsuite name="Shadow">
             <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
