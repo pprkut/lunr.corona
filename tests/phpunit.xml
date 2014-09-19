@@ -48,9 +48,6 @@
             <file>src/Lunr/Corona/Tests/WebRequestParserParseCommandLineArgumentsTest.php</file>
         </testsuite>
         <testsuite name="Shadow">
-            <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
-            <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
-            <file>src/Lunr/Shadow/Tests/CliRequestStoreRequestTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestParserBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestParserParseRequestTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestParserParseSuperGlobalTest.php</file>
