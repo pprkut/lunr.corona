@@ -39,6 +39,8 @@ else
     $autoloader->register();
 }
 
+define('REFLECTION_BUG_72194', (PHP_MAJOR_VERSION > 5));
+
 if (defined('TEST_STATICS') === FALSE)
 {
     define('TEST_STATICS', __DIR__ . '/statics');
