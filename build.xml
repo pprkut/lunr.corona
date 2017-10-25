@@ -141,5 +141,11 @@
         </exec>
     </target>
 
-    <target name="build" depends="clean,parallelTasks,phpunit,phpcb" />
+     <target name="setup">
+         <exec executable="decomposer">
+             <arg value="install"/>
+         </exec>
+     </target>
+
+    <target name="build" depends="clean,setup,parallelTasks,phpunit,phpcb" />
 </project>
