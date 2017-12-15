@@ -6,5 +6,6 @@
 # ignore test results
 build
 
-# ignore external interactions
+# ignore generated files
 vendor
+decomposer.autoload.inc.php
