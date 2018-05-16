@@ -50,9 +50,8 @@ pipeline {
                 parallel (
                     md: { ant_sh('phpmd-ci') },
                     cpd: { ant_sh('phpcpd') },
-                    cs: { ant_sh('phpcs-ci') },
-                    loc: { ant_sh('phploc') },
-                    doc: { ant_sh('phpdoc') }
+                    cs: { ant_sh('phpcs') },
+                    loc: { ant_sh('phploc') }
                 )
             }
         }
@@ -88,16 +87,6 @@ pipeline {
                                 reportName: 'PDepend Reports',
                                 reportDir: 'build/pdepend',
                                 reportFiles: '',
-                                keepAll: true
-                            ]
-                        )
-                    },
-                    phpdoc: {
-                        publishHTML(
-                            target: [
-                                reportName: 'PHPDoc Reports',
-                                reportDir: 'build/api',
-                                reportFiles: 'index.html',
                                 keepAll: true
                             ]
                         )
