@@ -1,19 +1,17 @@
 {
   "require": {
-    "psr/log": "~1.0.2",
-    "php": "5.6.* || 7.*",
+    "psr/log": "~1.1.0",
+    "php": ">=7.2",
     "lunr/halo": "dev-master",
     "lunr/config": "dev-master"
   },
   "suggest": {
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
-    "ext-msgpack": "Needed for msgpack support in Corona",
-    "ext-uopz": "Needed for unit tests on PHP 7 to mock internals",
-    "ext-runkit": "Needed for unit tests on PHP 5 to mock internals"
+    "ext-msgpack": "Needed for msgpack support in Corona"
   },
   "require-dev": {
-    "phpunit/phpunit": "~5.7",
-    "ext-xdebug": "~2.4"
+    "phpunit/phpunit": "~8.0",
+    "ext-xdebug": "~2.6"
   },
   "config": {
     "optimize-autoloader": true
