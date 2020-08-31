@@ -1,0 +1,8 @@
+parameters:
+    bootstrapFiles:
+        - ../decomposer.autoload.inc.php
+    excludes_analyse:
+        - ../src/*/Tests/*
+    universalObjectCratesClasses:
+        - Lunr\Corona\Request
+        - Lunr\Corona\FrontController

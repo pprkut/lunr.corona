@@ -14,6 +14,8 @@
         <mkdir dir="${basedir}/build/coverage" />
         <mkdir dir="${basedir}/build/logs" />
         <mkdir dir="${basedir}/build/pdepend" />
+
+        <touch file="${basedir}/build/logs/phpstan.xml" mkdirs="true" verbose="true" />
     </target>
 
     <target name="parallelTasks"
@@ -25,6 +27,7 @@
             </sequential>
             <antcall target="phpcpd"/>
             <antcall target="phpcs"/>
+            <antcall target="phpstan-ci"/>
             <antcall target="phploc"/>
         </parallel>
     </target>
@@ -119,6 +122,36 @@
             <arg path="${system}" />
             <arg value="--output" />
             <arg path="${basedir}/build/code-browser" />
+        </exec>
+    </target>
+
+    <target name="phpstan"
+            description="Analyse code with PHPStan">
+        <exec executable="phpstan">
+            <arg value="analyse" />
+            <arg path="${basedir}/src" />
+            <arg value="-c" />
+            <arg value="${basedir}/tests/phpstan.neon.dist" />
+            <arg value="--level" />
+            <arg value="2" />
+            <arg value="--no-progress" />
+            <arg value="--no-interaction" />
+        </exec>
+    </target>
+
+    <target name="phpstan-ci"
+            description="Analyse code with PHPStan">
+        <exec executable="phpstan" output="${basedir}/build/logs/phpstan.xml">
+            <arg value="analyse" />
+            <arg path="${basedir}/src" />
+            <arg value="-c" />
+            <arg value="${basedir}/tests/phpstan.neon.dist" />
+            <arg value="--level" />
+            <arg value="2" />
+            <arg value="--error-format" />
+            <arg value="checkstyle" />
+            <arg value="--no-progress" />
+            <arg value="--no-interaction" />
         </exec>
     </target>
 
