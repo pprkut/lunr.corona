@@ -69,6 +69,7 @@
             <file>../src/Lunr/Corona/Exceptions/Tests/PreconditionFailedExceptionBaseTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/RequestedRangeNotSatisfiableExceptionBaseTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/UnauthorizedExceptionBaseTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/UnprocessableEntityExceptionBaseTest.php</file>
         </testsuite>
         <testsuite name="Shadow">
             <file>../src/Lunr/Shadow/Tests/CliRequestParserBaseTest.php</file>
