@@ -24,5 +24,13 @@
             "prefix": "Psr\\Log",
             "search-path": "/Psr/Log/"
         }
+    },
+    "Psr-Cache": {
+        "url": "https://github.com/php-fig/cache.git",
+        "version": "1.0.1",
+        "psr4": {
+            "prefix": "Psr\\Cache",
+            "search-path": "/src/"
+        }
     }
 }
