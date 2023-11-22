@@ -12,11 +12,14 @@
 
 $base = __DIR__ . '/..';
 
+// Define application config lookup path
+$paths = [
+    get_include_path(),
+    $base . '/src',
+];
+
 set_include_path(
-    $base . '/src:' .
-    $base . '/tests:' .
-    $base . '/tests/statics:' .
-    get_include_path()
+    implode(':', $paths)
 );
 
 if (file_exists($base . '/vendor/autoload.php') == TRUE)
