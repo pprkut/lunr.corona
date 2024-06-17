@@ -3,7 +3,6 @@
     "psr/log": "~1.1.0",
     "php": ">=8.1",
     "psr/cache": "~1.0",
-    "lunr/halo": "dev-master",
     "lunr/config": "dev-master",
     "lunr/cliparser": "dev-master"
   },
@@ -13,6 +12,7 @@
     "ext-uuid": "Needed for setting unique request IDs in Corona/Shadow"
   },
   "require-dev": {
+    "lunr/halo": "dev-master",
     "phpunit/phpunit": ">=9.0 <9.6",
     "ext-xdebug": "~3.1"
   },
