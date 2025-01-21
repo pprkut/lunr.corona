@@ -7,6 +7,11 @@ parameters:
         - phpstan.autoload.inc.php
     excludePaths:
         - ../src/*/Tests/*
+    ignoreErrors:
+        -
+            identifier: property.uninitializedReadonly
+        -
+            identifier: property.readOnlyAssignNotInConstructor
     universalObjectCratesClasses:
         - Lunr\Corona\Request
         - Lunr\Corona\FrontController
