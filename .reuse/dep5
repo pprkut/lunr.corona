@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Lunr
+Upstream-Name: Lunr.Corona
 Upstream-Contact: Heinz Wiesinger <pprkut@liwjatan.org>
-Source: https://github.com/lunr-php/lunr
+Source: https://github.com/lunr-php/lunr.corona
 
 Files: .git_commit_template
 Copyright: 2011 M2mobi B.V., Amsterdam, The Netherlands

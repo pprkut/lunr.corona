@@ -1,4 +1,10 @@
 {
+  "name": "lunr/corona",
+  "description": "Lunr.Corona is a set of libraries centered around request handling.",
+  "keywords": [ "request", "response", "MVC", "routing", "router" ],
+  "homepage": "https://github.com/lunr-php/lunr.corona",
+  "type": "library",
+  "license": "MIT",
   "require": {
     "psr/log": ">=1.1",
     "php": ">=8.1",
