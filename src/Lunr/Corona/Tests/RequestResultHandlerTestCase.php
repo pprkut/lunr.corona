@@ -88,7 +88,7 @@ abstract class RequestResultHandlerTestCase extends LunrBaseTestCase
      *
      * @return array $names Array of invalid names
      */
-    public function invalidControllerNameProvider(): array
+    public static function invalidControllerNameProvider(): array
     {
         $names   = [];
         $names[] = [ NULL ];

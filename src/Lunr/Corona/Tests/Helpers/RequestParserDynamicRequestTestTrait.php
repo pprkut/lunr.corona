@@ -36,28 +36,28 @@ trait RequestParserDynamicRequestTestTrait
      *
      * @return array $base Array of controller key names
      */
-    abstract public function controllerKeyNameProvider(): array;
+    abstract public static function controllerKeyNameProvider(): array;
 
     /**
      * Unit Test Data Provider for possible method key names.
      *
      * @return array $base Array of method key names
      */
-    abstract public function methodKeyNameProvider(): array;
+    abstract public static function methodKeyNameProvider(): array;
 
     /**
      * Unit Test Data Provider for possible parameter key names.
      *
      * @return array $base Array of parameter key names
      */
-    abstract public function paramsKeyNameProvider(): array;
+    abstract public static function paramsKeyNameProvider(): array;
 
     /**
      * Unit Test Data Provider for Device Useragent keys.
      *
      * @return array $keys Array of array keys.
      */
-    abstract public function deviceUserAgentKeyProvider(): array;
+    abstract public static function deviceUserAgentKeyProvider(): array;
 
     /**
      * Test that parse_request() unsets request data in the AST.

@@ -74,7 +74,7 @@ trait RequestParserStaticRequestTestTrait
      *
      * @return array $base Array of base_url parameters and possible values
      */
-    abstract public function baseurlProvider(): array;
+    abstract public static function baseurlProvider(): array;
 
     /**
      * Test that parse_request() unsets request data in the AST.

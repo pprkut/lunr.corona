@@ -91,7 +91,7 @@ abstract class HTMLViewTestCase extends LunrBaseTestCase
      *
      * @return array $values Set of test data.
      */
-    public function cssAlternateProvider(): array
+    public static function cssAlternateProvider(): array
     {
         $values   = [];
         $values[] = [ 'row', 0, '', 'row_even' ];

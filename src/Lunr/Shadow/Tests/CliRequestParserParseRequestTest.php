@@ -161,7 +161,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTestCase
      *
      * @return array $base Array of base_url parameters and possible values
      */
-    public function baseurlProvider(): array
+    public static function baseurlProvider(): array
     {
         $base   = [];
         $base[] = [ 'HTTPS', '443', 'https://www.domain.com/path/to/' ];
@@ -177,7 +177,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTestCase
      *
      * @return array $base Array of controller key names
      */
-    public function controllerKeyNameProvider(): array
+    public static function controllerKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'controller' ];
@@ -191,7 +191,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTestCase
      *
      * @return array $base Array of method key names
      */
-    public function methodKeyNameProvider(): array
+    public static function methodKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'method' ];
@@ -205,7 +205,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTestCase
      *
      * @return array $base Array of parameter key names
      */
-    public function paramsKeyNameProvider(): array
+    public static function paramsKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'param' ];
@@ -220,7 +220,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTestCase
      *
      * @return array $base Array of verbosity key names
      */
-    public function verbosityProvider(): array
+    public static function verbosityProvider(): array
     {
         $value   = [];
         $value[] = [ 'v', 1, LogLevel::NOTICE ];
@@ -238,7 +238,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTestCase
      *
      * @return array $keys Array of array keys.
      */
-    public function deviceUserAgentKeyProvider(): array
+    public static function deviceUserAgentKeyProvider(): array
     {
         $keys   = [];
         $keys[] = [ 'device_useragent' ];

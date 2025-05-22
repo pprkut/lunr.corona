@@ -100,7 +100,7 @@ class RequestParserParseRequestTest extends RequestParserTestCase
      *
      * @return array $base Array of base_url parameters and possible values
      */
-    public function baseurlProvider(): array
+    public static function baseurlProvider(): array
     {
         $base   = [];
         $base[] = [ 'HTTPS', '443', 'https://www.domain.com/path/to/' ];

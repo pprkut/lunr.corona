@@ -108,7 +108,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $request Sample request values
      */
-    protected function getRequestValues(): array
+    protected static function getRequestValues(): array
     {
         return [
             'protocol'         => 'https',
@@ -132,11 +132,11 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $values Set of request values
      */
-    public function requestValueProvider(): array
+    public static function requestValueProvider(): array
     {
         $values = [];
 
-        foreach ($this->getRequestValues() as $key => $value)
+        foreach (self::getRequestValues() as $key => $value)
         {
             $values[] = [ $key, $value ];
         }
@@ -149,7 +149,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $values Set of cli argument key value pair
      */
-    public function validCliArgsValueProvider(): array
+    public static function validCliArgsValueProvider(): array
     {
         $values   = [];
         $values[] = [ [] ];
@@ -165,7 +165,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $values Set cli argument keys
      */
-    public function cliArgsKeyProvider(): array
+    public static function cliArgsKeyProvider(): array
     {
         $values   = [];
         $values[] = [ [] ];
@@ -180,7 +180,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $cookie Set of invalid mock values
      */
-    public function invalidMockValueProvider(): array
+    public static function invalidMockValueProvider(): array
     {
         $values   = [];
         $values[] = [ new stdClass() ];
@@ -197,7 +197,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $keys Array of unhandled key values
      */
-    public function unhandledMagicGetKeysProvider(): array
+    public static function unhandledMagicGetKeysProvider(): array
     {
         $keys   = [];
         $keys[] = [ 'Unhandled' ];
@@ -210,7 +210,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $value Array of content type(s)
      */
-    public function contentTypeProvider(): array
+    public static function contentTypeProvider(): array
     {
         $value   = [];
         $value[] = [[ 'text/html' ]];
@@ -223,7 +223,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $value Array of language(s)
      */
-    public function acceptLanguageProvider(): array
+    public static function acceptLanguageProvider(): array
     {
         $value   = [];
         $value[] = [[ 'en-US' ]];
@@ -236,7 +236,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $value Array of charset(s)
      */
-    public function acceptCharsetProvider(): array
+    public static function acceptCharsetProvider(): array
     {
         $value   = [];
         $value[] = [[ 'utf-8' ]];

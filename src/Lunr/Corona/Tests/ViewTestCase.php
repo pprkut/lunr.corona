@@ -118,7 +118,7 @@ abstract class ViewTestCase extends LunrBaseTestCase
      *
      * @return array $values Set of test data.
      */
-    public function baseUrlProvider(): array
+    public static function baseUrlProvider(): array
     {
         $values   = [];
         $values[] = [ 'http://www.example.org/', 'method/param', 'http://www.example.org/method/param' ];
@@ -131,7 +131,7 @@ abstract class ViewTestCase extends LunrBaseTestCase
      *
      * @return array $values Set of test data.
      */
-    public function staticsProvider(): array
+    public static function staticsProvider(): array
     {
         $values   = [];
         $values[] = [ '/', 'statics', 'image/test.jpg', '/statics/image/test.jpg' ];
@@ -146,7 +146,7 @@ abstract class ViewTestCase extends LunrBaseTestCase
      *
      * @return array $values Array of mocked fatal error information.
      */
-    public function fatalErrorInfoProvider(): array
+    public static function fatalErrorInfoProvider(): array
     {
         $values   = [];
         $values[] = [ [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
@@ -163,7 +163,7 @@ abstract class ViewTestCase extends LunrBaseTestCase
      *
      * @return array $values Array of non-fatal error information.
      */
-    public function errorInfoProvider(): array
+    public static function errorInfoProvider(): array
     {
         $values   = [];
         $values[] = [ NULL ];

@@ -75,7 +75,7 @@ abstract class FrontControllerTestCase extends LunrBaseTestCase
      *
      * @return array $names Array of invalid names
      */
-    public function invalidControllerNameProvider(): array
+    public static function invalidControllerNameProvider(): array
     {
         $names   = [];
         $names[] = [ NULL ];
@@ -91,7 +91,7 @@ abstract class FrontControllerTestCase extends LunrBaseTestCase
      *
      * @return array Array of invalid controller names
      */
-    public function invalidControllerNameValuesProvider(): array
+    public static function invalidControllerNameValuesProvider(): array
     {
         $controllerNames   = [];
         $controllerNames[] = [ 'test+test' ];

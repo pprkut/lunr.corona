@@ -173,7 +173,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTestCase
      *
      * @return array $base Array of base_url parameters and possible values
      */
-    public function baseurlProvider(): array
+    public static function baseurlProvider(): array
     {
         $base   = [];
         $base[] = [ 'HTTPS', '443', 'https://www.domain.com/path/to/' ];
@@ -189,7 +189,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTestCase
      *
      * @return array $base Array of controller key names
      */
-    public function controllerKeyNameProvider(): array
+    public static function controllerKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'controller' ];
@@ -202,7 +202,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTestCase
      *
      * @return array $base Array of method key names
      */
-    public function methodKeyNameProvider(): array
+    public static function methodKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'method' ];
@@ -215,7 +215,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTestCase
      *
      * @return array $base Array of parameter key names
      */
-    public function paramsKeyNameProvider(): array
+    public static function paramsKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'param' ];
@@ -228,7 +228,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTestCase
      *
      * @return array $keys Array of array keys.
      */
-    public function deviceUserAgentKeyProvider(): array
+    public static function deviceUserAgentKeyProvider(): array
     {
         $keys   = [];
         $keys[] = [ 'HTTP_X_DEVICE_USER_AGENT' ];

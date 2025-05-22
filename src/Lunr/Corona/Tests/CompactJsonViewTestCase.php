@@ -84,7 +84,7 @@ abstract class CompactJsonViewTestCase extends LunrBaseTestCase
      *
      * @return array $info Array of data values.
      */
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         $info   = [];
         $info[] = [ [ 'key1' => 'value', 'key2' => NULL ], [ 'key1' => 'value' ] ];

@@ -84,7 +84,7 @@ abstract class JsonViewTestCase extends LunrBaseTestCase
      *
      * @return array $info Array of non-integer error info values.
      */
-    public function invalidErrorInfoProvider(): array
+    public static function invalidErrorInfoProvider(): array
     {
         $info   = [];
         $info[] = [ 'string' ];

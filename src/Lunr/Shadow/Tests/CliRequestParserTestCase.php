@@ -89,7 +89,7 @@ abstract class CliRequestParserTestCase extends LunrBaseTestCase
      *
      * @return array $cookie Set of invalid super global values
      */
-    public function invalidSuperglobalValueProvider(): array
+    public static function invalidSuperglobalValueProvider(): array
     {
         $values   = [];
         $values[] = [ [] ];
@@ -106,7 +106,7 @@ abstract class CliRequestParserTestCase extends LunrBaseTestCase
      *
      * @return array $value Array of content type(s)
      */
-    public function contentTypeProvider(): array
+    public static function contentTypeProvider(): array
     {
         $value   = [];
         $value[] = [ 'text/html' ];
@@ -119,7 +119,7 @@ abstract class CliRequestParserTestCase extends LunrBaseTestCase
      *
      * @return array $value Array of language(s)
      */
-    public function acceptLanguageProvider(): array
+    public static function acceptLanguageProvider(): array
     {
         $value   = [];
         $value[] = [ 'en-US' ];
@@ -132,7 +132,7 @@ abstract class CliRequestParserTestCase extends LunrBaseTestCase
      *
      * @return array $value Array of charset(s)
      */
-    public function acceptCharsetProvider(): array
+    public static function acceptCharsetProvider(): array
     {
         $value   = [];
         $value[] = [ 'utf-8' ];

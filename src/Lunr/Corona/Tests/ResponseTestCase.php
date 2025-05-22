@@ -52,7 +52,7 @@ abstract class ResponseTestCase extends LunrBaseTestCase
      *
      * @return array $codes Array of invalid return codes.
      */
-    public function invalidReturnCodeProvider(): array
+    public static function invalidReturnCodeProvider(): array
     {
         $codes   = [];
         $codes[] = [ '502' ];
@@ -68,7 +68,7 @@ abstract class ResponseTestCase extends LunrBaseTestCase
      *
      * @return array $attrs Array of attribute names and their default values.
      */
-    public function validResponseAttributesProvider(): array
+    public static function validResponseAttributesProvider(): array
     {
         $attrs   = [];
         $attrs[] = [ 'view', '' ];
@@ -81,7 +81,7 @@ abstract class ResponseTestCase extends LunrBaseTestCase
      *
      * @return array $attrs Array of attribute names.
      */
-    public function invalidResponseAttributesProvider(): array
+    public static function invalidResponseAttributesProvider(): array
     {
         $attrs   = [];
         $attrs[] = [ 'data' ];
