@@ -26,6 +26,11 @@ enum MockApiVersionEnum: int implements ParsedEnumValueInterface, ApiVersionInte
     case MOCK_1 = 1;
 
     /**
+     * Mock value.
+     */
+    case MOCK_2 = 2;
+
+    /**
      * Map scalar to an enum instance or NULL.
      *
      * This could just be an alias for BackedEnum::tryFrom(), but allows for more flexibility when needed.
