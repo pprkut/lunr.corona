@@ -32,6 +32,12 @@ class ClientApiKeyParser implements RequestEnumValueParserInterface
     protected readonly ?BackedEnum $client;
 
     /**
+     * Whether the client value has been initialized or not.
+     * @var true
+     */
+    protected readonly bool $clientInitialized;
+
+    /**
      * The allowed API keys.
      * @var ApiKeys
      */
@@ -91,7 +97,7 @@ class ClientApiKeyParser implements RequestEnumValueParserInterface
     public function get(BackedEnum&RequestValueInterface $key): ?string
     {
         return match ($key) {
-            ClientValue::Client => ($this->client ?? $this->parse())?->value,
+            ClientValue::Client => (isset($this->clientInitialized) ? $this->client : $this->parse())?->value,
             default             => throw new RuntimeException('Unsupported request value type "' . $key::class . '"'),
         };
     }
@@ -106,7 +112,7 @@ class ClientApiKeyParser implements RequestEnumValueParserInterface
     public function getAsEnum(BackedEnum&RequestEnumValueInterface $key): ?BackedEnum
     {
         return match ($key) {
-            ClientValue::Client => $this->client ?? $this->parse(),
+            ClientValue::Client => isset($this->clientInitialized) ? $this->client : $this->parse(),
             default             => throw new RuntimeException('Unsupported request value type "' . $key::class . '"'),
         };
     }
@@ -133,6 +139,8 @@ class ClientApiKeyParser implements RequestEnumValueParserInterface
         {
             $this->client = call_user_func_array([ $this->enumName, 'tryFromRequestValue' ], [ NULL ]);
         }
+
+        $this->clientInitialized = TRUE;
 
         return $this->client;
     }

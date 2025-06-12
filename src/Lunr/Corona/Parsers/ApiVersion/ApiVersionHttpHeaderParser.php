@@ -29,6 +29,12 @@ class ApiVersionHttpHeaderParser implements RequestEnumValueParserInterface
     protected readonly ?BackedEnum $apiVersion;
 
     /**
+     * Whether the apiVersion value has been initialized or not.
+     * @var true
+     */
+    protected readonly bool $apiVersionInitialized;
+
+    /**
      * The name of the HTTP header holding the API version info
      * @var string
      */
@@ -80,7 +86,7 @@ class ApiVersionHttpHeaderParser implements RequestEnumValueParserInterface
     public function get(BackedEnum&RequestValueInterface $key): ?string
     {
         return match ($key) {
-            ApiVersionValue::ApiVersion => ($this->apiVersion ?? $this->parse())?->value,
+            ApiVersionValue::ApiVersion => (isset($this->apiVersionInitialized) ? $this->apiVersion : $this->parse())?->value,
             default                     => throw new RuntimeException('Unsupported request value type "' . $key::class . '"'),
         };
     }
@@ -95,7 +101,7 @@ class ApiVersionHttpHeaderParser implements RequestEnumValueParserInterface
     public function getAsEnum(BackedEnum&RequestEnumValueInterface $key): ?BackedEnum
     {
         return match ($key) {
-            ApiVersionValue::ApiVersion => $this->apiVersion ?? $this->parse(),
+            ApiVersionValue::ApiVersion => isset($this->apiVersionInitialized) ? $this->apiVersion : $this->parse(),
             default                     => throw new RuntimeException('Unsupported request value type "' . $key::class . '"'),
         };
     }
@@ -115,6 +121,8 @@ class ApiVersionHttpHeaderParser implements RequestEnumValueParserInterface
         }
 
         $this->apiVersion = call_user_func_array([ $this->enumName, 'tryFromRequestValue' ], [ $version ]);
+
+        $this->apiVersionInitialized = TRUE;
 
         return $this->apiVersion;
     }

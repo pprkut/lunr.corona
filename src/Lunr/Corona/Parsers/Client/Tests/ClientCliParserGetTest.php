@@ -57,10 +57,26 @@ class ClientCliParserGetTest extends ClientCliParserTestCase
         $client = MockClientEnum::CommandLine;
 
         $this->setReflectionPropertyValue('client', $client);
+        $this->setReflectionPropertyValue('clientInitialized', TRUE);
 
         $value = $this->class->get(ClientValue::Client);
 
         $this->assertEquals($client->value, $value);
+    }
+
+    /**
+     * Test getting a parsed client.
+     *
+     * @covers Lunr\Corona\Parsers\Client\ClientCliParser::get
+     */
+    public function testGetParsedNullClient()
+    {
+        $this->setReflectionPropertyValue('client', NULL);
+        $this->setReflectionPropertyValue('clientInitialized', TRUE);
+
+        $value = $this->class->get(ClientValue::Client);
+
+        $this->assertNull($value);
     }
 
     /**
@@ -106,10 +122,26 @@ class ClientCliParserGetTest extends ClientCliParserTestCase
         $client = MockClientEnum::CommandLine;
 
         $this->setReflectionPropertyValue('client', $client);
+        $this->setReflectionPropertyValue('clientInitialized', TRUE);
 
         $value = $this->class->getAsEnum(ClientValue::Client);
 
         $this->assertEquals($client, $value);
+    }
+
+    /**
+     * Test getting a parsed client.
+     *
+     * @covers Lunr\Corona\Parsers\Client\ClientCliParser::getAsEnum
+     */
+    public function testGetParsedNullClientAsEnum()
+    {
+        $this->setReflectionPropertyValue('client', NULL);
+        $this->setReflectionPropertyValue('clientInitialized', TRUE);
+
+        $value = $this->class->getAsEnum(ClientValue::Client);
+
+        $this->assertNull($value);
     }
 
     /**

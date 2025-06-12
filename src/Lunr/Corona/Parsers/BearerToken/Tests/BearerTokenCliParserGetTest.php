@@ -55,10 +55,26 @@ class BearerTokenCliParserGetTest extends BearerTokenCliParserTestCase
         $token = '123456789';
 
         $this->setReflectionPropertyValue('bearerToken', $token);
+        $this->setReflectionPropertyValue('bearerTokenInitialized', TRUE);
 
         $value = $this->class->get(BearerTokenValue::BearerToken);
 
         $this->assertEquals($token, $value);
+    }
+
+    /**
+     * Test getting a parsed bearer token.
+     *
+     * @covers Lunr\Corona\Parsers\BearerToken\BearerTokenCliParser::get
+     */
+    public function testGetParsedNullBearerToken()
+    {
+        $this->setReflectionPropertyValue('bearerToken', NULL);
+        $this->setReflectionPropertyValue('bearerTokenInitialized', TRUE);
+
+        $value = $this->class->get(BearerTokenValue::BearerToken);
+
+        $this->assertNull($value);
     }
 
     /**

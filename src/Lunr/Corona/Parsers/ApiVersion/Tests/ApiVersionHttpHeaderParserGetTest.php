@@ -57,10 +57,26 @@ class ApiVersionHttpHeaderParserGetTest extends ApiVersionHttpHeaderParserTestCa
         $version = MockApiVersionEnum::MOCK_1;
 
         $this->setReflectionPropertyValue('apiVersion', $version);
+        $this->setReflectionPropertyValue('apiVersionInitialized', TRUE);
 
         $value = $this->class->get(ApiVersionValue::ApiVersion);
 
         $this->assertEquals($version->value, $value);
+    }
+
+    /**
+     * Test getting a parsed API version.
+     *
+     * @covers Lunr\Corona\Parsers\ApiVersion\ApiVersionHttpHeaderParser::get
+     */
+    public function testGetParsedNullApiVersion()
+    {
+        $this->setReflectionPropertyValue('apiVersion', NULL);
+        $this->setReflectionPropertyValue('apiVersionInitialized', TRUE);
+
+        $value = $this->class->get(ApiVersionValue::ApiVersion);
+
+        $this->assertNull($value);
     }
 
     /**
@@ -121,10 +137,26 @@ class ApiVersionHttpHeaderParserGetTest extends ApiVersionHttpHeaderParserTestCa
         $version = MockApiVersionEnum::MOCK_1;
 
         $this->setReflectionPropertyValue('apiVersion', $version);
+        $this->setReflectionPropertyValue('apiVersionInitialized', TRUE);
 
         $value = $this->class->getAsEnum(ApiVersionValue::ApiVersion);
 
         $this->assertEquals($version, $value);
+    }
+
+    /**
+     * Test getting a parsed API version.
+     *
+     * @covers Lunr\Corona\Parsers\ApiVersion\ApiVersionHttpHeaderParser::getAsEnum
+     */
+    public function testGetParsedNullApiVersionAsEnum()
+    {
+        $this->setReflectionPropertyValue('apiVersion', NULL);
+        $this->setReflectionPropertyValue('apiVersionInitialized', TRUE);
+
+        $value = $this->class->getAsEnum(ApiVersionValue::ApiVersion);
+
+        $this->assertNull($value);
     }
 
     /**

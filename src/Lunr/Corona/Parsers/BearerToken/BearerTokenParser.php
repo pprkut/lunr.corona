@@ -27,6 +27,12 @@ class BearerTokenParser implements RequestValueParserInterface
     protected readonly ?string $bearerToken;
 
     /**
+     * Whether the bearerToken value has been initialized or not.
+     * @var true
+     */
+    protected readonly bool $bearerTokenInitialized;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -62,7 +68,7 @@ class BearerTokenParser implements RequestValueParserInterface
     public function get(BackedEnum&RequestValueInterface $key): ?string
     {
         return match ($key) {
-            BearerTokenValue::BearerToken => $this->bearerToken ?? $this->parse(),
+            BearerTokenValue::BearerToken => isset($this->bearerTokenInitialized) ? $this->bearerToken : $this->parse(),
             default                       => throw new RuntimeException('Unsupported request value type "' . $key::class . '"'),
         };
     }
@@ -86,6 +92,8 @@ class BearerTokenParser implements RequestValueParserInterface
         }
 
         $this->bearerToken = $token;
+
+        $this->bearerTokenInitialized = TRUE;
 
         return $token;
     }
