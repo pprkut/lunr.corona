@@ -12,6 +12,7 @@ namespace Lunr\Corona\Parsers\Client\Tests;
 use Lunr\Corona\Parsers\Client\ClientApiKeyParser;
 use Lunr\Corona\Parsers\Client\ClientValue;
 use Lunr\Corona\Parsers\Client\Tests\Helpers\MockClientEnum;
+use Lunr\Corona\Tests\Helpers\MockArrayAccess;
 use Lunr\Corona\Tests\Helpers\MockRequestValue;
 use RuntimeException;
 
@@ -114,6 +115,26 @@ class ClientApiKeyParserGetTest extends ClientApiKeyParserTestCase
     /**
      * Test getting a parsed client.
      *
+     * @covers Lunr\Corona\Parsers\Client\ClientApiKeyParser::get
+     */
+    public function testGetClientUsingArrayAccess()
+    {
+        $version = MockClientEnum::CommandLine;
+
+        $keys = new MockArrayAccess($this->keys);
+
+        $_SERVER['HTTP_API_KEY'] = '9c531993fd2f4d81b7cd57c1cfcb323e';
+
+        $class = new ClientApiKeyParser(MockClientEnum::class, $keys);
+
+        $value = $class->get(ClientValue::Client);
+
+        $this->assertEquals($version->value, $value);
+    }
+
+    /**
+     * Test getting a parsed client.
+     *
      * @covers Lunr\Corona\Parsers\Client\ClientApiKeyParser::getAsEnum
      */
     public function testGetParsedClientAsEnum()
@@ -169,6 +190,26 @@ class ClientApiKeyParserGetTest extends ClientApiKeyParserTestCase
         $_SERVER['HTTP_X_API_KEY'] = '9c531993fd2f4d81b7cd57c1cfcb323e';
 
         $class = new ClientApiKeyParser(MockClientEnum::class, $this->keys, 'X-Api-Key');
+
+        $value = $class->getAsEnum(ClientValue::Client);
+
+        $this->assertEquals($version, $value);
+    }
+
+    /**
+     * Test getting a parsed client.
+     *
+     * @covers Lunr\Corona\Parsers\Client\ClientApiKeyParser::get
+     */
+    public function testGetClientUsingArrayAccessAsEnum()
+    {
+        $version = MockClientEnum::CommandLine;
+
+        $keys = new MockArrayAccess($this->keys);
+
+        $_SERVER['HTTP_API_KEY'] = '9c531993fd2f4d81b7cd57c1cfcb323e';
+
+        $class = new ClientApiKeyParser(MockClientEnum::class, $keys);
 
         $value = $class->getAsEnum(ClientValue::Client);
 

@@ -9,6 +9,7 @@
 
 namespace Lunr\Corona\Parsers\Client;
 
+use ArrayAccess;
 use BackedEnum;
 use Lunr\Corona\ParsedEnumValueInterface;
 use Lunr\Corona\RequestEnumValueInterface;
@@ -18,6 +19,8 @@ use RuntimeException;
 
 /**
  * Request Value Parser for the client.
+ *
+ * @phpstan-type ApiKeys array<string, BackedEnum&ParsedEnumValueInterface>|ArrayAccess<string, BackedEnum&ParsedEnumValueInterface>
  */
 class ClientApiKeyParser implements RequestEnumValueParserInterface
 {
@@ -30,9 +33,9 @@ class ClientApiKeyParser implements RequestEnumValueParserInterface
 
     /**
      * The allowed API keys.
-     * @var array<string, BackedEnum&ParsedEnumValueInterface>
+     * @var ApiKeys
      */
-    protected readonly array $keys;
+    protected readonly array|ArrayAccess $keys;
 
     /**
      * The name of the HTTP header holding the API key
@@ -49,11 +52,11 @@ class ClientApiKeyParser implements RequestEnumValueParserInterface
     /**
      * Constructor.
      *
-     * @param class-string<BackedEnum&ParsedEnumValueInterface>  $enumName The name of the enum to use for client values.
-     * @param array<string, BackedEnum&ParsedEnumValueInterface> $keys     Allowed API keys
-     * @param non-empty-string                                   $header   The name of the HTTP header holding the API key.
+     * @param class-string<BackedEnum&ParsedEnumValueInterface> $enumName The name of the enum to use for client values.
+     * @param ApiKeys                                           $keys     Allowed API keys
+     * @param non-empty-string                                  $header   The name of the HTTP header holding the API key.
      */
-    public function __construct(string $enumName, array $keys, string $header = 'Api-Key')
+    public function __construct(string $enumName, array|ArrayAccess $keys, string $header = 'Api-Key')
     {
         $this->enumName = $enumName;
         $this->keys     = $keys;
@@ -122,7 +125,7 @@ class ClientApiKeyParser implements RequestEnumValueParserInterface
             $key = $_SERVER[$this->header];
         }
 
-        if (array_key_exists($key, $this->keys))
+        if (is_object($this->keys) && $this->keys->offsetExists($key) || is_array($this->keys) && array_key_exists($key, $this->keys))
         {
             $this->client = $this->keys[$key];
         }
