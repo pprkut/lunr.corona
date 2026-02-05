@@ -23,7 +23,7 @@ class HttpMethodBaseTest extends LunrBaseTestCase
     /**
      * Unit Test Data Provider for request value.
      *
-     * @return array Request valyes.
+     * @return array Request values.
      */
     public static function requestValueProvider(): array
     {
