@@ -15,8 +15,7 @@
   },
   "suggest": {
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
-    "ext-msgpack": "Needed for msgpack support in Corona",
-    "ext-uuid": "Needed for setting unique request IDs in Corona/Shadow"
+    "ext-msgpack": "Needed for msgpack support in Corona"
   },
   "require-dev": {
     "lunr/halo": "dev-master",

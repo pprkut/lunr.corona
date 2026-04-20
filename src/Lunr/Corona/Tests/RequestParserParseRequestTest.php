@@ -41,13 +41,7 @@ class RequestParserParseRequestTest extends RequestParserTestCase
      */
     protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = ''): void
     {
-        if (!extension_loaded('uuid'))
-        {
-            $this->markTestSkipped('Extension uuid is required.');
-        }
-
         $this->mockFunction('gethostname', fn() => 'Lunr');
-        $this->mockFunction('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
 
         $this->mockedCalls = [
             'default_application_path' => [ 'default_application_path', '/full/path/to/' ],
@@ -78,7 +72,6 @@ class RequestParserParseRequestTest extends RequestParserTestCase
     private function cleanup_request_test(): void
     {
         $this->unmockFunction('gethostname');
-        $this->unmockFunction('uuid_create');
     }
 
 }

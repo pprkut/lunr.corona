@@ -37,15 +37,9 @@ class CliRequestParserParseRequestTest extends CliRequestParserTestCase
      */
     protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = ''): void
     {
-        if (!extension_loaded('uuid'))
-        {
-            $this->markTestSkipped('Extension uuid is required.');
-        }
-
         $_SERVER['SCRIPT_FILENAME'] = '/full/path/to/index.php';
 
         $this->mockFunction('gethostname', fn() => 'Lunr');
-        $this->mockFunction('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
 
         if ($useragent === TRUE)
         {
@@ -139,7 +133,6 @@ class CliRequestParserParseRequestTest extends CliRequestParserTestCase
     private function cleanup_request_test(): void
     {
         $this->unmockFunction('gethostname');
-        $this->unmockFunction('uuid_create');
     }
 
     /**
