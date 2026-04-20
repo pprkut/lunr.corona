@@ -9,7 +9,6 @@
 
 namespace Lunr\Corona\Parsers\TracingInfo\Tests;
 
-use Lunr\Corona\Parsers\TracingInfo\TracingInfoParser;
 use Lunr\Corona\Parsers\TracingInfo\TracingInfoValue;
 use Lunr\Corona\Tests\Helpers\MockRequestValue;
 use RuntimeException;
@@ -86,39 +85,155 @@ class TracingInfoParserGetTest extends TracingInfoParserTestCase
      */
     public function testGetTraceIDGeneratesNewID(): void
     {
+        $bytes   = hex2bin('49f58d6f02244946acf9efcd63896263');
         $traceID = '49f58d6f02244946acf9efcd63896263';
 
-        $this->mockFunction('uuid_create', fn() => '49f58d6f-0224-4946-acf9-efcd63896263');
+        $this->mockFunction('random_bytes', fn() => $bytes);
 
         $value = $this->class->get(TracingInfoValue::TraceID);
 
         $this->assertEquals($traceID, $value);
         $this->assertPropertySame('traceID', $traceID);
 
-        $this->unmockFunction('uuid_create');
+        $this->unmockFunction('random_bytes');
     }
 
     /**
-     * Test getting a trace ID generates a new UUID.
+     * Test getting a trace ID from a valid traceparent header.
      *
      * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
      */
-    public function testGetTraceIDGeneratesNewUUID(): void
+    public function testGetTraceIDFromTraceparentHeader(): void
     {
-        $traceID = '49f58d6f-0224-4946-acf9-efcd63896263';
+        $_SERVER['HTTP_TRACEPARENT'] = '00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01';
 
-        $this->mockFunction('uuid_create', fn() => $traceID);
+        $value = $this->class->get(TracingInfoValue::TraceID);
 
-        $class = new TracingInfoParser(uuidAsHexString: FALSE);
+        $this->assertEquals('4bf92f3577b34da6a3ce929d0e0e4736', $value);
+        $this->assertPropertySame('traceID', '4bf92f3577b34da6a3ce929d0e0e4736');
+    }
 
-        $value = $class->get(TracingInfoValue::TraceID);
+    /**
+     * Test getting a parent span ID from a valid traceparent header.
+     *
+     * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
+     */
+    public function testGetParentSpanIDFromTraceparentHeader(): void
+    {
+        $_SERVER['HTTP_TRACEPARENT'] = '00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01';
 
-        $this->assertEquals($traceID, $value);
+        $value = $this->class->get(TracingInfoValue::ParentSpanID);
 
-        $property = $this->getReflectionProperty('traceID');
-        $this->assertEquals($traceID, $property->getValue($class));
+        $this->assertEquals('00f067aa0ba902b7', $value);
+    }
 
-        $this->unmockFunction('uuid_create');
+    /**
+     * Test getting trace flags from a valid traceparent header.
+     *
+     * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
+     */
+    public function testGetTraceFlagsFromTraceparentHeader(): void
+    {
+        $_SERVER['HTTP_TRACEPARENT'] = '00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-00';
+
+        $value = $this->class->get(TracingInfoValue::TraceFlags);
+
+        $this->assertEquals('00', $value);
+    }
+
+    /**
+     * Test getting trace flags defaults to sampled when no traceparent is present.
+     *
+     * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
+     */
+    public function testGetTraceFlagsDefaultsToSampled(): void
+    {
+        $value = $this->class->get(TracingInfoValue::TraceFlags);
+
+        $this->assertEquals('01', $value);
+    }
+
+    /**
+     * Test that traceparent takes priority over REQUEST_ID.
+     *
+     * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
+     */
+    public function testTraceparentTakesPriorityOverRequestID(): void
+    {
+        $_SERVER['HTTP_TRACEPARENT'] = '00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01';
+        $_SERVER['REQUEST_ID']       = 'aaaabbbbccccddddeeee111122223333';
+
+        $value = $this->class->get(TracingInfoValue::TraceID);
+
+        $this->assertEquals('4bf92f3577b34da6a3ce929d0e0e4736', $value);
+    }
+
+    /**
+     * Test that a malformed traceparent header is ignored.
+     *
+     * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
+     */
+    public function testMalformedTraceparentIsIgnored(): void
+    {
+        $_SERVER['HTTP_TRACEPARENT'] = 'garbage-value';
+
+        $bytes = hex2bin('49f58d6f02244946acf9efcd63896263');
+
+        $this->mockFunction('random_bytes', fn() => $bytes);
+
+        $value = $this->class->get(TracingInfoValue::TraceID);
+
+        $this->assertEquals('49f58d6f02244946acf9efcd63896263', $value);
+
+        $this->unmockFunction('random_bytes');
+    }
+
+    /**
+     * Test that a traceparent with all-zero trace ID is ignored.
+     *
+     * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
+     */
+    public function testTraceparentAllZeroTraceIDIsIgnored(): void
+    {
+        $_SERVER['HTTP_TRACEPARENT'] = '00-00000000000000000000000000000000-00f067aa0ba902b7-01';
+
+        $bytes = hex2bin('49f58d6f02244946acf9efcd63896263');
+
+        $this->mockFunction('random_bytes', fn() => $bytes);
+
+        $value = $this->class->get(TracingInfoValue::TraceID);
+
+        $this->assertEquals('49f58d6f02244946acf9efcd63896263', $value);
+
+        $parentValue = $this->class->get(TracingInfoValue::ParentSpanID);
+
+        $this->assertNull($parentValue);
+
+        $this->unmockFunction('random_bytes');
+    }
+
+    /**
+     * Test that a traceparent with all-zero parent span ID is ignored.
+     *
+     * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
+     */
+    public function testTraceparentAllZeroParentSpanIDIsIgnored(): void
+    {
+        $_SERVER['HTTP_TRACEPARENT'] = '00-4bf92f3577b34da6a3ce929d0e0e4736-0000000000000000-01';
+
+        $bytes = hex2bin('49f58d6f02244946acf9efcd63896263');
+
+        $this->mockFunction('random_bytes', fn() => $bytes);
+
+        $value = $this->class->get(TracingInfoValue::TraceID);
+
+        $this->assertEquals('49f58d6f02244946acf9efcd63896263', $value);
+
+        $parentValue = $this->class->get(TracingInfoValue::ParentSpanID);
+
+        $this->assertNull($parentValue);
+
+        $this->unmockFunction('random_bytes');
     }
 
     /**
@@ -161,39 +276,17 @@ class TracingInfoParserGetTest extends TracingInfoParserTestCase
      */
     public function testGetRequestIDGeneratesNewID(): void
     {
+        $bytes   = hex2bin('49f58d6f02244946acf9efcd63896263');
         $traceID = '49f58d6f02244946acf9efcd63896263';
 
-        $this->mockFunction('uuid_create', fn() => '49f58d6f-0224-4946-acf9-efcd63896263');
+        $this->mockFunction('random_bytes', fn() => $bytes);
 
         $value = $this->class->get(TracingInfoValue::RequestID);
 
         $this->assertEquals($traceID, $value);
         $this->assertPropertySame('traceID', $traceID);
 
-        $this->unmockFunction('uuid_create');
-    }
-
-    /**
-     * Test getting a request ID generates a new UUID.
-     *
-     * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
-     */
-    public function testGetRequestIDGeneratesNewUUID(): void
-    {
-        $traceID = '49f58d6f-0224-4946-acf9-efcd63896263';
-
-        $this->mockFunction('uuid_create', fn() => $traceID);
-
-        $class = new TracingInfoParser(uuidAsHexString: FALSE);
-
-        $value = $class->get(TracingInfoValue::RequestID);
-
-        $this->assertEquals($traceID, $value);
-
-        $property = $this->getReflectionProperty('traceID');
-        $this->assertEquals($traceID, $property->getValue($class));
-
-        $this->unmockFunction('uuid_create');
+        $this->unmockFunction('random_bytes');
     }
 
     /**
@@ -203,7 +296,7 @@ class TracingInfoParserGetTest extends TracingInfoParserTestCase
      */
     public function testGetParsedSpanID(): void
     {
-        $spanID = '9b00922000f349e6bd688349d2dc2b38';
+        $spanID = '9b00922000f349e6';
 
         $this->setReflectionPropertyValue('spanID', $spanID);
 
@@ -219,43 +312,21 @@ class TracingInfoParserGetTest extends TracingInfoParserTestCase
      */
     public function testGetSpanIDGeneratesNewID(): void
     {
-        $spanID = '49f58d6f02244946acf9efcd63896263';
+        $bytes  = hex2bin('49f58d6f02244946');
+        $spanID = '49f58d6f02244946';
 
-        $this->mockFunction('uuid_create', fn() => '49f58d6f-0224-4946-acf9-efcd63896263');
+        $this->mockFunction('random_bytes', fn() => $bytes);
 
         $value = $this->class->get(TracingInfoValue::SpanID);
 
         $this->assertEquals($spanID, $value);
         $this->assertPropertySame('spanID', $spanID);
 
-        $this->unmockFunction('uuid_create');
+        $this->unmockFunction('random_bytes');
     }
 
     /**
-     * Test getting a span ID generates a new UUID.
-     *
-     * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
-     */
-    public function testGetSpanIDGeneratesNewUUID(): void
-    {
-        $spanID = '49f58d6f-0224-4946-acf9-efcd63896263';
-
-        $this->mockFunction('uuid_create', fn() => $spanID);
-
-        $class = new TracingInfoParser(uuidAsHexString: FALSE);
-
-        $value = $class->get(TracingInfoValue::SpanID);
-
-        $this->assertEquals($spanID, $value);
-
-        $property = $this->getReflectionProperty('spanID');
-        $this->assertEquals($spanID, $property->getValue($class));
-
-        $this->unmockFunction('uuid_create');
-    }
-
-    /**
-     * Test getting a parent span ID.
+     * Test getting a parent span ID when no traceparent is present.
      *
      * @covers Lunr\Corona\Parsers\TracingInfo\TracingInfoParser::get
      */

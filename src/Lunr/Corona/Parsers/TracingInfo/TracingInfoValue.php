@@ -37,6 +37,11 @@ enum TracingInfoValue: string implements RequestValueInterface
      */
     case ParentSpanID = 'parentSpanID';
 
+    /**
+     * Trace Flags.
+     */
+    case TraceFlags = 'traceFlags';
+
 }
 
 ?>

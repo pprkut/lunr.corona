@@ -10,8 +10,6 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\Parsers\TracingInfo\TracingInfoValue;
-use Lunr\Corona\Request;
-use Lunr\Corona\RequestParserInterface;
 use Lunr\Corona\RequestValueParserInterface;
 
 /**
@@ -46,21 +44,23 @@ class RequestTracingControllerTest extends RequestTestCase
 
         $this->setReflectionPropertyValue('mock', $mock);
 
-        $id = '1bee74f0-5f21-4b7f-9fff-62e7320e9aa5';
+        $id = '00f067aa0ba902b7';
 
         $parser->expects($this->once())
                ->method('get')
                ->with(TracingInfoValue::SpanID)
                ->willReturn($id);
 
-        $this->mockFunction('uuid_create', fn() => '200c5938-cbe1-4b58-ad36-022ab5c6bcc6');
+        $bytes = hex2bin('200c5938cbe14b58');
+
+        $this->mockFunction('random_bytes', fn() => $bytes);
 
         $this->class->startChildSpan();
 
         $expected = [
             [
-                TracingInfoValue::ParentSpanID->value => '1bee74f0-5f21-4b7f-9fff-62e7320e9aa5',
-                TracingInfoValue::SpanID->value       => '200c5938cbe14b58ad36022ab5c6bcc6',
+                TracingInfoValue::ParentSpanID->value => '00f067aa0ba902b7',
+                TracingInfoValue::SpanID->value       => '200c5938cbe14b58',
                 'controller'                          => 'test',
             ],
             [
@@ -70,7 +70,7 @@ class RequestTracingControllerTest extends RequestTestCase
 
         $this->assertPropertyEquals('mock', $expected);
 
-        $this->unmockFunction('uuid_create');
+        $this->unmockFunction('random_bytes');
     }
 
     /**
@@ -89,100 +89,29 @@ class RequestTracingControllerTest extends RequestTestCase
 
         $this->setReflectionPropertyValue('parsers', $parsers);
 
-        $id = '1bee74f0-5f21-4b7f-9fff-62e7320e9aa5';
+        $id = '00f067aa0ba902b7';
 
         $parser->expects($this->once())
                ->method('get')
                ->with(TracingInfoValue::SpanID)
                ->willReturn($id);
 
-        $this->mockFunction('uuid_create', fn() => '200c5938-cbe1-4b58-ad36-022ab5c6bcc6');
+        $bytes = hex2bin('200c5938cbe14b58');
+
+        $this->mockFunction('random_bytes', fn() => $bytes);
 
         $this->class->startChildSpan();
 
         $expected = [
             [
-                TracingInfoValue::ParentSpanID->value => '1bee74f0-5f21-4b7f-9fff-62e7320e9aa5',
-                TracingInfoValue::SpanID->value       => '200c5938cbe14b58ad36022ab5c6bcc6',
+                TracingInfoValue::ParentSpanID->value => '00f067aa0ba902b7',
+                TracingInfoValue::SpanID->value       => '200c5938cbe14b58',
             ],
         ];
 
         $this->assertPropertyEquals('mock', $expected);
 
-        $this->unmockFunction('uuid_create');
-    }
-
-    /**
-     * Check that startChildSpan() starts a new span.
-     *
-     * @covers Lunr\Corona\Request::startChildSpan
-     */
-    public function testStartChildSpanWithRealUuidValue(): void
-    {
-        $parser = $this->getMockBuilder(RequestParserInterface::class)->getMock();
-
-        $parser->expects($this->once())
-               ->method('parse_request')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_post')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_get')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_cookie')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_server')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_files')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_command_line_arguments')
-               ->willReturn([]);
-
-        $class = new Request($parser, uuidAsHexString: FALSE);
-
-        $parser = $this->getMockBuilder(RequestValueParserInterface::class)
-                       ->getMock();
-
-        $parsers = [
-            TracingInfoValue::class => $parser,
-        ];
-
-        $this->getReflectionProperty('parsers')->setValue($class, $parsers);
-
-        $id = '1bee74f0-5f21-4b7f-9fff-62e7320e9aa5';
-
-        $parser->expects($this->once())
-               ->method('get')
-               ->with(TracingInfoValue::SpanID)
-               ->willReturn($id);
-
-        $this->mockFunction('uuid_create', fn() => '200c5938-cbe1-4b58-ad36-022ab5c6bcc6');
-
-        $class->startChildSpan();
-
-        $expected = [
-            [
-                TracingInfoValue::ParentSpanID->value => '1bee74f0-5f21-4b7f-9fff-62e7320e9aa5',
-                TracingInfoValue::SpanID->value       => '200c5938-cbe1-4b58-ad36-022ab5c6bcc6',
-            ],
-        ];
-
-        $value = $this->getReflectionProperty('mock')->getValue($class);
-
-        $this->assertEquals($expected, $value);
-
-        $this->unmockFunction('uuid_create');
+        $this->unmockFunction('random_bytes');
     }
 
     /**
@@ -194,8 +123,8 @@ class RequestTracingControllerTest extends RequestTestCase
     {
         $mock = [
             [
-                TracingInfoValue::ParentSpanID->value => '1bee74f0-5f21-4b7f-9fff-62e7320e9aa5',
-                TracingInfoValue::SpanID->value       => '200c5938cbe14b58ad36022ab5c6bcc6',
+                TracingInfoValue::ParentSpanID->value => '00f067aa0ba902b7',
+                TracingInfoValue::SpanID->value       => '200c5938cbe14b58',
                 'controller'                          => 'test',
             ],
         ];
@@ -218,8 +147,8 @@ class RequestTracingControllerTest extends RequestTestCase
     {
         $mock = [
             [
-                TracingInfoValue::ParentSpanID->value => '1bee74f0-5f21-4b7f-9fff-62e7320e9aa5',
-                TracingInfoValue::SpanID->value       => '200c5938cbe14b58ad36022ab5c6bcc6',
+                TracingInfoValue::ParentSpanID->value => '00f067aa0ba902b7',
+                TracingInfoValue::SpanID->value       => '200c5938cbe14b58',
                 'controller'                          => 'test',
             ],
             [
@@ -257,121 +186,35 @@ class RequestTracingControllerTest extends RequestTestCase
     }
 
     /**
-     * Test that getNewSpanId() returns a hex-only ID.
+     * Test that getNewSpanId() returns a 16-hex span ID.
      *
      * @covers Lunr\Corona\Request::getNewSpanId
      */
-    public function testGetNewHexOnlySpanId(): void
+    public function testGetNewSpanId(): void
     {
-        $this->mockFunction('uuid_create', fn() => '200c5938-cbe1-4b58-ad36-022ab5c6bcc6');
+        $bytes = hex2bin('200c5938cbe14b58');
+
+        $this->mockFunction('random_bytes', fn() => $bytes);
 
         $value = $this->class->getNewSpanId();
 
-        $this->assertEquals('200c5938cbe14b58ad36022ab5c6bcc6', $value);
+        $this->assertEquals('200c5938cbe14b58', $value);
 
-        $this->unmockFunction('uuid_create');
+        $this->unmockFunction('random_bytes');
     }
 
     /**
-     * Test that getNewSpanId() returns a canonical ID.
-     *
-     * @covers Lunr\Corona\Request::getNewSpanId
-     */
-    public function testGetNewCanonicalSpanId(): void
-    {
-        $parser = $this->getMockBuilder(RequestParserInterface::class)->getMock();
-
-        $parser->expects($this->once())
-               ->method('parse_request')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_post')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_get')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_cookie')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_server')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_files')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_command_line_arguments')
-               ->willReturn([]);
-
-        $class = new Request($parser, uuidAsHexString: FALSE);
-
-        $this->mockFunction('uuid_create', fn() => '200c5938-cbe1-4b58-ad36-022ab5c6bcc6');
-
-        $value = $class->getNewSpanId();
-
-        $this->assertEquals('200c5938-cbe1-4b58-ad36-022ab5c6bcc6', $value);
-
-        $this->unmockFunction('uuid_create');
-    }
-
-    /**
-     * Test that isValidSpanId() checks correctly when class is set to hex only.
+     * Test that isValidSpanId() checks correctly for 16-hex span IDs.
      *
      * @covers Lunr\Corona\Request::isValidSpanId
      */
-    public function testIsValidSpanIdWhenHexOnly(): void
+    public function testIsValidSpanId(): void
     {
-        $this->assertTrue($this->class->isValidSpanId('200c5938cbe14b58ad36022ab5c6bcc6'));
+        $this->assertTrue($this->class->isValidSpanId('200c5938cbe14b58'));
+        $this->assertFalse($this->class->isValidSpanId('200c5938cbe14b58ad36022ab5c6bcc6'));
         $this->assertFalse($this->class->isValidSpanId('200c5938-cbe1-4b58-ad36-022ab5c6bcc6'));
-    }
-
-    /**
-     * Test that isValidSpanId() checks correctly when class is set to canonical.
-     *
-     * @covers Lunr\Corona\Request::isValidSpanId
-     */
-    public function testIsValidSpanIdWhenCanonical(): void
-    {
-        $parser = $this->getMockBuilder(RequestParserInterface::class)->getMock();
-
-        $parser->expects($this->once())
-               ->method('parse_request')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_post')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_get')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_cookie')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_server')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_files')
-               ->willReturn([]);
-
-        $parser->expects($this->once())
-               ->method('parse_command_line_arguments')
-               ->willReturn([]);
-
-        $class = new Request($parser, uuidAsHexString: FALSE);
-
-        $this->assertFalse($class->isValidSpanId('200c5938cbe14b58ad36022ab5c6bcc6'));
-        $this->assertTrue($class->isValidSpanId('200c5938-cbe1-4b58-ad36-022ab5c6bcc6'));
+        $this->assertFalse($this->class->isValidSpanId('0000000000000000'));
+        $this->assertFalse($this->class->isValidSpanId('ZZZZZZZZZZZZZZZZ'));
     }
 
 }

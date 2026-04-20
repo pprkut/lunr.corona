@@ -113,18 +113,11 @@ class Request implements TracingControllerInterface, TracingInfoInterface
     private array $mock;
 
     /**
-     * Whether to generate UUIDs as hex string or real UUIDs.
-     * @var bool
-     */
-    protected readonly bool $uuidAsHexString;
-
-    /**
      * Constructor.
      *
-     * @param RequestParserInterface $parser          Shared instance of a Request Parser class
-     * @param bool                   $uuidAsHexString Whether to generate UUIDs as hex string or real UUIDs
+     * @param RequestParserInterface $parser Shared instance of a Request Parser class
      */
-    public function __construct($parser, $uuidAsHexString = TRUE)
+    public function __construct($parser)
     {
         $this->parser  = $parser;
         $this->parsers = [];
@@ -139,8 +132,6 @@ class Request implements TracingControllerInterface, TracingInfoInterface
         $this->rawData = '';
 
         $this->mock = [];
-
-        $this->uuidAsHexString = $uuidAsHexString;
     }
 
     /**
@@ -213,14 +204,7 @@ class Request implements TracingControllerInterface, TracingInfoInterface
      */
     public function getNewSpanId(): string
     {
-        $uuid = uuid_create();
-
-        if ($this->uuidAsHexString)
-        {
-            $uuid = str_replace('-', '', $uuid);
-        }
-
-        return $uuid;
+        return bin2hex(random_bytes(8));
     }
 
     /**
@@ -232,16 +216,12 @@ class Request implements TracingControllerInterface, TracingInfoInterface
      */
     public function isValidSpanId(string $id): bool
     {
-        if ($this->uuidAsHexString)
+        if (preg_match('/^[a-f0-9]{16}$/', $id) !== 1)
         {
-            $regex = '/^[a-f0-9]{32}$/i';
-        }
-        else
-        {
-            $regex = '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i';
+            return FALSE;
         }
 
-        return (bool) preg_match($regex, $id);
+        return $id !== '0000000000000000';
     }
 
     /**

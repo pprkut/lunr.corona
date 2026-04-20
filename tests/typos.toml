@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: Copyright 2026 Framna Netherlands B.V., Zwolle, The Netherlands
+# SPDX-License-Identifier: CC0-1.0
+
+[default.extend-identifiers]
+00f067aa0ba902b7 = "00f067aa0ba902b7"
