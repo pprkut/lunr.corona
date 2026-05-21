@@ -9,16 +9,16 @@
     "psr/log": ">=3.0",
     "php": ">=8.3",
     "psr/cache": ">=3.0",
-    "lunr/config": "dev-master",
-    "lunr/cliparser": "dev-master",
-    "lunr/ticks": "dev-master"
+    "lunr/config": "~0.13.0",
+    "lunr/cliparser": "~0.12.0",
+    "lunr/ticks": "~0.13.0"
   },
   "suggest": {
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
     "ext-msgpack": "Needed for msgpack support in Corona"
   },
   "require-dev": {
-    "lunr/halo": "dev-master",
+    "lunr/halo": "~0.12.0",
     "mockery/mockery": "~1.6",
     "phpunit/phpunit": ">=10.5 <11.0",
     "ext-xdebug": "~3.1"
